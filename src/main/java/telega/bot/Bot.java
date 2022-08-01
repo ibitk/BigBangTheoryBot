@@ -25,6 +25,13 @@ public class Bot {
         add("01");
         add("12");
         add("20");
+        add("03");
+        add("34");
+        add("41");
+        add("13");
+        add("24");
+        add("40");
+        add("32");
     }};
 
     public void serve() {
@@ -74,7 +81,11 @@ public class Bot {
                                     new InlineKeyboardButton("✂️")
                                             .callbackData(String.format("%d %s %s %s", chatId, senderName, senderChose, "1")),
                                     new InlineKeyboardButton("\uD83D\uDCC4")
-                                            .callbackData(String.format("%d %s %s %s", chatId, senderName, senderChose, "2"))
+                                            .callbackData(String.format("%d %s %s %s", chatId, senderName, senderChose, "2")),
+                                    new InlineKeyboardButton("\uD83E\uDD8E")
+                                            .callbackData(String.format("%d %s %s %s", chatId, senderName, senderChose, "3")),
+                                    new InlineKeyboardButton("\uD83D\uDD96")
+                                            .callbackData(String.format("%d %s %s %s", chatId, senderName, senderChose, "4"))
                             )
                     );
 
@@ -83,8 +94,9 @@ public class Bot {
             InlineQueryResultArticle scissors = buildInlineButton("scissors", "✂️ Scissors", "1");
             InlineQueryResultArticle paper = buildInlineButton("paper", "\uD83D\uDCC4 Paper", "2");
             InlineQueryResultArticle lizard = buildInlineButton("lizard", "\uD83E\uDD8E Lizard", "3");
+            InlineQueryResultArticle spock = buildInlineButton("spock", "\uD83D\uDD96 Spock", "4");
 
-            request = new AnswerInlineQuery(inlineQuery.id(), rook, scissors, paper, lizard).cacheTime(1);
+            request = new AnswerInlineQuery(inlineQuery.id(), rook, scissors, paper, lizard, spock).cacheTime(1);
 
         } else if (callbackQuery != null) {
             String[] data = callbackQuery.data().split(" ");
@@ -108,10 +120,6 @@ public class Bot {
                 ));
             }
         }
-//        } else if (message != null) {
-//            long chatId = message.chat().id();
-//            request = new SendMessage(chatId, "Hello!");
-//        }
         if (request != null) {
             var blabla = bot.execute(request);
             System.out.println(blabla);
